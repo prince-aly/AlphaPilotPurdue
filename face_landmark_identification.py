@@ -321,7 +321,7 @@ def main():
     def show_landmarks_batch(sample_batched):
         """Show image with landmarks for a batch of samples."""
         images_batch, landmarks_batch = \
-                sample_batched['image'], sample_batched['landmarks']
+                sample_batched['image'].cpu(), sample_batched['landmarks'].cpu()
         batch_size = len(images_batch)
         im_size = images_batch.size(2)
     
@@ -361,7 +361,7 @@ def main():
             #_, predicted = outputs.data
             print("Predicted", outputs.data.shape)
             
-            if i_batch == 3:
+            if i_batch == 4:
               plt.figure()
               show_landmarks_batch({'image': images, 'landmarks': outputs.data.reshape(-1, 68, 2) })
               plt.axis('off')
